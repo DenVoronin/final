@@ -1,0 +1,76 @@
+create database hhr;
+
+create table project
+(id int not null primary key auto_increment,
+client varchar (100) not null,
+card_status int,
+FOREIGN KEY (card_status) REFERENCES cardstatus (Id),
+project_type int,
+FOREIGN KEY (project_type) REFERENCES projecttype (Id),
+id_employee int not null,
+name varchar (200) not null,
+func_area text,
+subject_area text,
+description text not null,
+tasks text not null,
+stage int,
+FOREIGN KEY (stage) REFERENCES projectstage (Id),
+dead_line date not null,
+technoligies text not null,
+dev_method int,
+FOREIGN KEY (dev_method) REFERENCES devmethodology (Id),
+stake_holders int,
+product boolean not null,
+analitics int not null,
+devs int not null,
+testers boolean not null,
+tech_writers boolean not null,
+team int not null,
+location text,
+timeplan int,
+FOREIGN KEY (timeplan) REFERENCES timeplan (Id),
+deadline_hr date not null,
+overtimes int,
+FOREIGN KEY (overtimes) REFERENCES overtimes (Id),
+hr_details text not null,
+gost boolean not null);
+
+
+
+create table devmethodology (id int not null primary key auto_increment, name varchar (200) not null);
+create table overtimes (id int not null primary key auto_increment, name varchar (200) not null);
+create table cardstatus (id int not null primary key auto_increment, name varchar (200) not null);
+create table projectstage (id int not null primary key auto_increment, name varchar (200) not null);
+create table projecttype (id int not null primary key auto_increment, name varchar (200) not null);
+create table timeplan (id int not null primary key auto_increment, name varchar (200) not null);
+
+insert cardstatus(name) values("Новая");
+insert cardstatus(name) values("Черновик");
+insert cardstatus(name) values("Сохранена");
+insert cardstatus(name) values("В архиве");
+insert cardstatus(name) values("Переоткрыта");
+insert cardstatus(name) values("Закрыта");
+
+insert projecttype(name) values("Фикс");
+insert projecttype(name) values("Т и М");
+insert projecttype(name) values("ПО");
+insert projecttype(name) values("ПАК");
+insert projecttype(name) values("MVP");
+insert projecttype(name) values("Новая система");
+insert projecttype(name) values("Модернизация существующей системы");
+
+insert projectstage(name) values("Инициация");
+insert projectstage(name) values("Начало");
+insert projectstage(name) values("Середина");
+insert projectstage(name) values("Завершение");
+
+insert devmethodology(name) values("Waterfall Model");
+insert devmethodology(name) values("Incremental Model");
+insert devmethodology(name) values("Agile Model");
+insert devmethodology(name) values("Spiral Model");
+
+insert timeplan(name) values("Строго по графику");
+insert timeplan(name) values("Сдвиг по времени");
+
+insert overtimes(name) values("Редкие");
+insert overtimes(name) values("Постоянные");
