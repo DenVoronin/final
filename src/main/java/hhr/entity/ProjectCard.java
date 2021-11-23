@@ -63,6 +63,8 @@ public class ProjectCard {
     String hrDetails; // Процедура вывода людей
     Boolean gost; // Будет ли документирование по ГОСТ
 
+ProjectCard(){}
+
     public ProjectCard(String client, String funcArea,
                 String subjectArea,String description, String tasks,
                 Boolean gost, String hrDetails )

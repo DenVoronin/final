@@ -9,7 +9,7 @@ public class DevMethodology {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
     String name;
-
+DevMethodology(){}
     DevMethodology(int id, String name){
         this.id = id;
         this.name=name;

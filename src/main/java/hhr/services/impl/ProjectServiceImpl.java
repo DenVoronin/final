@@ -25,8 +25,8 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public ProjectCard getByName(String car) {
-        return projectRepository.findByName(car);
+    public ProjectCard getByName(String name) {
+        return projectRepository.findByName(name);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public ProjectCard editCar(ProjectCard project) {
+    public ProjectCard edit(ProjectCard project) {
         return projectRepository.saveAndFlush(project);
     }
 

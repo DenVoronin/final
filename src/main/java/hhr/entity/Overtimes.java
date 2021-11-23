@@ -9,7 +9,7 @@ public class Overtimes {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
     String name;
-
+Overtimes(){}
     Overtimes(int id, String name){
         this.id = id;
         this.name=name;

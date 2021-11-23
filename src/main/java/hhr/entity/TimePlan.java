@@ -9,7 +9,7 @@ public class TimePlan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
     String name;
-
+TimePlan(){}
     TimePlan(int id, String name){
         this.id = id;
         this.name=name;

@@ -9,6 +9,6 @@ public interface ProjectService {
     void delete(int id);
     ProjectCard getByName(String project);
     ProjectCard getById(int id);
-    ProjectCard editCar(ProjectCard projectCard);
+    ProjectCard edit(ProjectCard projectCard);
     List<ProjectCard> getAll();
 }

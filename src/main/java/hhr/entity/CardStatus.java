@@ -14,7 +14,7 @@ public class CardStatus {
         this.name = name;
         this.id=id;
     }
-
+ CardStatus(){}
     public String getName() {
         return name;
     }

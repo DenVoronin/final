@@ -9,7 +9,7 @@ public class ProjectStage {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
     String name;
-
+ProjectStage(){}
     ProjectStage(int id, String name){
 
         this.id = id;
