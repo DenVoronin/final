@@ -62,12 +62,15 @@ public class ProjectCard {
     @Column(name = "hr_details",length = 65535,columnDefinition="Text")
     String hrDetails; // Процедура вывода людей
     Boolean gost; // Будет ли документирование по ГОСТ
-
 ProjectCard(){}
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public ProjectCard(String client, String funcArea,
-                String subjectArea,String description, String tasks,
-                Boolean gost, String hrDetails )
+                       String subjectArea, String description, String tasks,
+                       Boolean gost, String hrDetails )
     {
         this.client = client;
         this.funcArea= funcArea;

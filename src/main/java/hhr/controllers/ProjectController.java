@@ -55,7 +55,7 @@ public class ProjectController {
         projectServiceImpl.newProject(projectCard);
         return "create";
     }
-    @PostMapping (value="/project/{id}")
+    @GetMapping (value="/project/{id}")
     @ApiOperation(value = "Get project by id")
     public ProjectCard getProject(@PathVariable("id") String id){
         return projectServiceImpl.getById(Integer.parseInt(id));
@@ -66,14 +66,18 @@ public class ProjectController {
     public List<ProjectCard> getProjects() {
         return projectServiceImpl.getAll();
     }
+
     @GetMapping (value="/project/delete/{id}")
     @ApiOperation(value = "Delete project by id")
     public void deleteProject(@PathVariable("id") String id){
         projectServiceImpl.delete(Integer.parseInt(id));
     }
+
     @PostMapping (value="/project/edit/{id}")
     @ApiOperation(value = "Edit project by id")
-    public ProjectCard editProject(@PathVariable("id") String id){
-        return projectServiceImpl.edit(projectServiceImpl.getById(Integer.parseInt(id)));
+    public void  editProject(@PathVariable("id") String id, @RequestBody ProjectCard projectCard){
+        projectCard.setId(Integer.parseInt(id));
+        projectServiceImpl.edit(projectCard);
+
     }
 }

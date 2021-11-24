@@ -3,7 +3,7 @@ package hhr.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "projecttype")
+@Table(name = "project_type")
 public class ProjectType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
