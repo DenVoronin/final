@@ -36,7 +36,6 @@ hr_details text not null,
 gost boolean not null);
 
 
-
 create table dev_methodology (id int not null primary key auto_increment, name varchar (200) not null);
 create table overtimes (id int not null primary key auto_increment, name varchar (200) not null);
 create table card_status (id int not null primary key auto_increment, name varchar (200) not null);

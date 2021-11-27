@@ -7,10 +7,14 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @Configuration
 @EnableWebSecurity
-public class LDAPConfig extends WebSecurityConfigurerAdapter {
+public class LDAPConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
     @Value("${ldap.urls}")
     private String ldapUrls;
 
@@ -30,10 +34,12 @@ public class LDAPConfig extends WebSecurityConfigurerAdapter {
 
         protected void configure(HttpSecurity http) throws Exception {
             http
-                    .authorizeRequests()
+                     .authorizeRequests()
                     .anyRequest().authenticated()
                     .and()
                     .formLogin()
+                    .and()
+                    .cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues())
                     .and()
                     .csrf()
                     .disable();
@@ -41,6 +47,12 @@ public class LDAPConfig extends WebSecurityConfigurerAdapter {
 
         }
 
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins("*")
+                .allowedMethods("*");
+    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -50,7 +62,7 @@ public class LDAPConfig extends WebSecurityConfigurerAdapter {
                 .url(ldapUrls +"/" +ldapBaseDn)
                 .managerDn(ldapSecurityPrincipal)
                 .managerPassword(ldapPrincipalPassword)
-                .and()
+               .and()
                 .userDnPatterns(ldapUserDnPattern);
     }
 }
