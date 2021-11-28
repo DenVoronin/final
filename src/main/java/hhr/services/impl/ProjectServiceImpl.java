@@ -6,6 +6,8 @@ import hhr.services.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 @Service
 public class ProjectServiceImpl implements ProjectService {
@@ -42,6 +44,24 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public List<ProjectCard> getAll() {
         return projectRepository.findAll();
+    }
+    public List getAllCustom()  {
+
+        List<ProjectCard> list = projectRepository.findAll();
+        List<Object> list1 = new ArrayList<Object>();
+        for (ProjectCard cards : list) {
+            HashMap map = new HashMap();
+            map.put("id",cards.getId());
+            map.put("name",cards.getName());
+            map.put("funcArea",cards.getFuncArea());
+            map.put("devMethod",cards.getDevMethod());
+            map.put("deadlineHR",cards.getDeadlineHR());
+            map.put("gost",cards.getGost());
+            map.put("cardStatus",cards.getCardStatus());
+            map.put("idEmployee",cards.getIdEmployee());
+            list1.add(map);
+        }
+        return list1;
     }
 
 }

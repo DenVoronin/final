@@ -51,10 +51,10 @@ public class ProjectController {
 
     @PostMapping (value="/project/new")
     @ApiOperation(value = "Create new")
-    public String create(@RequestBody ProjectCard projectCard){
+    public int create(@RequestBody ProjectCard projectCard){
 
         projectServiceImpl.newProject(projectCard);
-        return "create";
+        return projectCard.getId();
     }
     @GetMapping (value="/project/{id}")
     @ApiOperation(value = "Get project by id")
@@ -65,7 +65,7 @@ public class ProjectController {
     @GetMapping(value="/project/")
     @ApiOperation(value = "List of all project")
     public List<ProjectCard> getProjects() {
-        return projectServiceImpl.getAll();
+        return projectServiceImpl.getAllCustom();
     }
 
     @GetMapping (value="/project/delete/{id}")
