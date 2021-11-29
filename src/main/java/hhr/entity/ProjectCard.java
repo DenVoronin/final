@@ -9,6 +9,7 @@ public class ProjectCard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id; // ID проекта
+    String author;// Автор карточки
     String client; // Кто заказчик проекта
     @OneToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "card_status")
@@ -16,9 +17,6 @@ public class ProjectCard {
     @OneToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "project_type")
     ProjectType projectType; // Тип проекта
-    @Basic
-    @Column(name = "id_employee")
-    int idEmployee; // Автор карточки
     String name; // Наименование проекта
     @Basic
     @Column(name = "func_area",length = 65535,columnDefinition="Text")
@@ -97,9 +95,7 @@ ProjectCard(){}
         return projectType.name;
     }
 
-    public int getIdEmployee() {
-        return idEmployee;
-    }
+
 
     public String getName() {
         return name;
@@ -189,4 +185,7 @@ ProjectCard(){}
         return gost;
     }
 
+    public String getAuthor() {
+        return author;
+    }
 }

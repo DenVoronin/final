@@ -62,7 +62,7 @@ public class ProjectController {
         return projectServiceImpl.getById(Integer.parseInt(id));
     }
 
-    @GetMapping(value="/project/")
+    @GetMapping(value="/project")
     @ApiOperation(value = "List of all project")
     public List<ProjectCard> getProjects() {
         return projectServiceImpl.getAllCustom();
