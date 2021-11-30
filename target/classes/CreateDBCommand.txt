@@ -7,8 +7,8 @@ card_status int,
 FOREIGN KEY (card_status) REFERENCES card_status (Id),
 project_type int,
 FOREIGN KEY (project_type) REFERENCES project_type (Id),
-id_employee int not null,
 name varchar (200) not null,
+author varchar (200),
 func_area text,
 subject_area text,
 description text not null,
@@ -19,7 +19,7 @@ dead_line date not null,
 technoligies text not null,
 dev_method int,
 FOREIGN KEY (dev_method) REFERENCES dev_methodology (Id),
-stake_holders int,
+stake_holders varchar (200),
 product boolean not null,
 analitics int not null,
 devs int not null,
@@ -34,6 +34,7 @@ overtimes int,
 FOREIGN KEY (overtimes) REFERENCES overtimes (Id),
 hr_details text not null,
 gost boolean not null);
+
 
 
 create table dev_methodology (id int not null primary key auto_increment, name varchar (200) not null);

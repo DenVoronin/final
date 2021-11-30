@@ -39,7 +39,7 @@ public class ProjectCard {
     @OneToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "dev_method")
     DevMethodology devMethod; // Методология разработки
-    int stakeHolders; //Сколько стейкхолдеров на проекте
+    String stakeHolders; //Сколько стейкхолдеров на проекте
     Boolean product; // Продуктовая разработка
     int analitics; // Количество аналитиков
     int devs; // Количество разработчиков
@@ -133,7 +133,7 @@ ProjectCard(){}
         return devMethod.name;
     }
 
-    public int getStakeHolders() {
+    public String getStakeHolders() {
         return stakeHolders;
     }
 
