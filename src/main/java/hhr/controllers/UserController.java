@@ -45,18 +45,17 @@ public class UserController {
 
     @GetMapping(value="/user/whoami")
     @ApiOperation(value = "Get username and user groups")
-    public HashMap hello1() throws IOException, NamingException {
+    public User hello1() throws IOException, NamingException {
 
         User user = new User();
-        HashMap map = new HashMap();
+
         user.setName(SecurityContextHolder.getContext().getAuthentication().getName());
         user.setGroups(new LdapSearch().findGroupsByUsername(user.getName()));
 
 
-        map.put("username", user.getName());
-        map.put("groups",user.getGroups() );
+        
 
-        return map;
+        return user;
 
 
     }
