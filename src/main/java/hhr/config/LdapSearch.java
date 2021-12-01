@@ -20,7 +20,7 @@ public class LdapSearch {
         return searchControls;
     }
 
-  
+
  public ArrayList initiate(String username) {
      String url = "ldap://localhost:389";
 
