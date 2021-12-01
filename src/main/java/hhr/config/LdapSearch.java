@@ -21,7 +21,7 @@ public class LdapSearch {
     }
 
 
- public ArrayList initiate(String username) {
+ public ArrayList findGroupsByUsername(String username) {
      String url = "ldap://localhost:389";
 
      Hashtable env = new Hashtable();

@@ -15,8 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import org.springframework.web.bind.annotation.GetMapping;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -51,7 +50,7 @@ public class UserController {
         User user = new User();
         HashMap map = new HashMap();
         user.setName(SecurityContextHolder.getContext().getAuthentication().getName());
-        user.setGroups(new LdapSearch().initiate(user.getName()));
+        user.setGroups(new LdapSearch().findGroupsByUsername(user.getName()));
 
 
         map.put("username", user.getName());
