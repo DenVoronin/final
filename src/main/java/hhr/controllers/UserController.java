@@ -60,4 +60,10 @@ public class UserController {
 
 
     }
+    @GetMapping(value="/user/logout")
+    @ApiOperation(value = "Bye")
+    public HttpStatus Bye(){
+        SecurityContextHolder.clearContext();
+        return HttpStatus.OK;
+    }
 }
