@@ -11,10 +11,10 @@ public class ProjectCard {
     int id; // ID проекта
     String author;// Автор карточки
     String client; // Кто заказчик проекта
-    @OneToOne(optional = false, cascade = CascadeType.ALL)
+    @OneToOne(optional = false, cascade = CascadeType.MERGE)
     @JoinColumn(name = "card_status")
     CardStatus cardStatus; // Статус карточки
-    @OneToOne(optional = false, cascade = CascadeType.ALL)
+    @OneToOne(optional = false, cascade = CascadeType.MERGE)
     @JoinColumn(name = "project_type")
     ProjectType projectType; // Тип проекта
     String name; // Наименование проекта
@@ -28,7 +28,7 @@ public class ProjectCard {
     String description; // Описание проекта
     @Column(length = 65535,columnDefinition="Text")
     String tasks; // Задачи, которые придется решать на проекте
-    @OneToOne(optional = false, cascade = CascadeType.ALL)
+    @OneToOne(optional = false, cascade = CascadeType.MERGE)
     @JoinColumn(name = "stage")
     ProjectStage stage; // Стадия проекта
     @Basic
@@ -36,7 +36,7 @@ public class ProjectCard {
     LocalDate deadLine; // Срок завершения проекта
     @Column(length = 65535,columnDefinition="Text")
     String technoligies; // Технологии
-    @OneToOne(optional = false, cascade = CascadeType.ALL)
+    @OneToOne(optional = false, cascade = CascadeType.MERGE)
     @JoinColumn(name = "dev_method")
     DevMethodology devMethod; // Методология разработки
     String stakeHolders; //Сколько стейкхолдеров на проекте
@@ -48,13 +48,13 @@ public class ProjectCard {
     int team; // Количесво людей в команде
     @Column(length = 65535,columnDefinition="Text")
     String location; // Локация
-    @OneToOne(optional = false, cascade = CascadeType.ALL)
+    @OneToOne(optional = false, cascade = CascadeType.MERGE)
     @JoinColumn(name = "timeplan")
     TimePlan timeplan; // График времени
     @Basic
     @Column(name = "deadline_hr")
     LocalDate deadlineHR; // Дата вывода людей на проект
-    @OneToOne(optional = false, cascade = CascadeType.ALL)
+    @OneToOne(optional = false, cascade = CascadeType.MERGE)
     @JoinColumn(name = "overtimes")
     Overtimes overtimes; // Овертаймы
     @Column(name = "hr_details",length = 65535,columnDefinition="Text")
@@ -68,7 +68,7 @@ ProjectCard(){}
 
     public ProjectCard(String client, String funcArea,
                        String subjectArea, String description, String tasks,
-                       Boolean gost, String hrDetails )
+                       Boolean gost, String hrDetails, CardStatus cardStatus )
     {
         this.client = client;
         this.funcArea= funcArea;
@@ -77,6 +77,7 @@ ProjectCard(){}
         this.tasks = tasks;
         this.gost = gost;
         this.hrDetails = hrDetails;
+        this.cardStatus = cardStatus;
     }
 
     public int getId() {

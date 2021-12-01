@@ -53,7 +53,7 @@ public class UserController {
         user.setGroups(new LdapSearch().findGroupsByUsername(user.getName()));
 
 
-        
+
 
         return user;
 
