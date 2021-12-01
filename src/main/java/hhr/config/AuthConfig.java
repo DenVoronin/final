@@ -23,7 +23,7 @@ import java.util.Set;
 
 @Configuration
 @EnableWebSecurity
-public class LDAPConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
+public class AuthConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
     @Value("${ldap.urls}")
     private String ldapUrls;
 

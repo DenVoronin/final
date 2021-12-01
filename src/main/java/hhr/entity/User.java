@@ -1,28 +1,29 @@
 package hhr.entity;
 
 
-import org.springframework.ldap.query.LdapQuery;
-import org.springframework.security.ldap.search.LdapUserSearch;
+import java.util.ArrayList;
 
 public class User  {
     String name;
-    String group;
+    ArrayList groups;
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setGroup(String group) {
-        this.group = group;
+    public void setGroups(ArrayList group) {
+        this.groups = group;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getGroup() {
-        return group;
+    public ArrayList getGroups() {
+        return groups;
     }
+
+
 
 
 }

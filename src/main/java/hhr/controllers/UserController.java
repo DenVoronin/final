@@ -1,11 +1,14 @@
 package hhr.controllers;
 
+import hhr.config.LdapSearch;
 import hhr.entity.User;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.ldap.core.LdapTemplate;
+
 
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -15,8 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
+import javax.naming.*;
+
 import java.io.IOException;
 import java.util.*;
+
 
 
 
@@ -25,27 +31,26 @@ import java.util.*;
 @RequestMapping("/user")
 public class UserController {
 
-    @Autowired
+@Autowired
     LdapTemplate ldapTemplate;
+
+
 
 
 
     @GetMapping(value="/whoami")
     @ApiOperation(value = "Get username")
-    public HashMap hello1() throws IOException {
+    public Object hello1() throws IOException, NamingException {
 
         User user = new User();
         HashMap map = new HashMap();
         user.setName(SecurityContextHolder.getContext().getAuthentication().getName());
+        user.setGroups(new LdapSearch().initiate(user.getName()));
 
 
-
-
-
-
-       // user.setGroup(LdapQueryBuilder.query().);
         map.put("username", user.getName());
-        map.put("role",user.toString());
+        map.put("groups",user.getGroups() );
+
         return map;
 
 
