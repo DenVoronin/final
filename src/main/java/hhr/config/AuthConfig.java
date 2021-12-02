@@ -14,6 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.ldap.DefaultSpringSecurityContextSource;
 import org.springframework.security.ldap.userdetails.DefaultLdapAuthoritiesPopulator;
 import org.springframework.security.ldap.userdetails.LdapAuthoritiesPopulator;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -39,6 +40,12 @@ public class AuthConfig extends WebSecurityConfigurerAdapter implements WebMvcCo
     @Value("${ldap.user.dn.pattern}")
     private String ldapUserDnPattern;
 
+
+    @Bean
+    public AuthenticationSuccessHandler SuccessHanlerCustom(){
+        return new SuccessHanlerCustom();
+    }
+
     @Override
 
         protected void configure(HttpSecurity http) throws Exception {
@@ -46,7 +53,7 @@ public class AuthConfig extends WebSecurityConfigurerAdapter implements WebMvcCo
                      .authorizeRequests()
                     .anyRequest().authenticated()
                     .and()
-                    .formLogin()
+                    .formLogin().successHandler(SuccessHanlerCustom())
                     .and()
                     .cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues())
                     .and()

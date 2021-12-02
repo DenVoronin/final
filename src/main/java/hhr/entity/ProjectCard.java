@@ -60,7 +60,9 @@ public class ProjectCard {
     @Column(name = "hr_details",length = 65535,columnDefinition="Text")
     String hrDetails; // Процедура вывода людей
     Boolean gost; // Будет ли документирование по ГОСТ
-ProjectCard(){}
+
+
+    ProjectCard(){}
 
     public void setId(int id) {
         this.id = id;

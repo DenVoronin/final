@@ -20,22 +20,28 @@ public class LdapSearch {
         return searchControls;
     }
 
+     private Hashtable init(){
+         String url = "ldap://localhost:389";
+
+         Hashtable env = new Hashtable();
+         env.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
+         env.put(Context.PROVIDER_URL, url);
+         env.put(Context.SECURITY_AUTHENTICATION, "simple");
+         env.put(Context.SECURITY_PRINCIPAL, "cn=Manager,dc=maxcrc,dc=com");
+         env.put(Context.SECURITY_CREDENTIALS, "secret");
+
+        return env;
+     }
+
 
  public ArrayList findGroupsByUsername(String username) {
-     String url = "ldap://localhost:389";
 
-     Hashtable env = new Hashtable();
-     env.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
-     env.put(Context.PROVIDER_URL, url);
-     env.put(Context.SECURITY_AUTHENTICATION, "simple");
-     env.put(Context.SECURITY_PRINCIPAL, "cn=Manager,dc=maxcrc,dc=com");
-     env.put(Context.SECURITY_CREDENTIALS, "secret");
 
 
      ArrayList gett = new ArrayList();
 
      try {
-         DirContext ctx = new InitialDirContext(env);
+         DirContext ctx = new InitialDirContext(init());
          System.out.println(ctx.getEnvironment());
 
 

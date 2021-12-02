@@ -1,6 +1,7 @@
 package hhr.controllers;
 
-import hhr.config.LdapSearch;
+
+
 import hhr.entity.User;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -22,9 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.naming.*;
 
 import java.io.IOException;
-import java.util.*;
 
-
+import java.util.ArrayList;
 
 
 @RestController
@@ -45,17 +45,9 @@ public class UserController {
 
     @GetMapping(value="/user/whoami")
     @ApiOperation(value = "Get username and user groups")
-    public User hello1() throws IOException, NamingException {
+    public void hello1() throws IOException, NamingException {
 
-        User user = new User();
-
-        user.setName(SecurityContextHolder.getContext().getAuthentication().getName());
-        user.setGroups(new LdapSearch().findGroupsByUsername(user.getName()));
-
-
-
-
-        return user;
+       // return user.getGroups();
 
 
     }
