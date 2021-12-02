@@ -59,8 +59,14 @@ public class ProjectController {
     }
     @PreAuthorize("@UserRole.isUP() OR @UserRole.isLR() OR @UserRole.isRS()")
     @GetMapping (value="/project/{id}")
-    @ApiOperation(value = "Get project by id")
+    @ApiOperation(value = "Get FREE project by id")
     public ProjectCard getProject(@PathVariable("id") String id){
+        return projectServiceImpl.getById(Integer.parseInt(id));
+    }
+
+    @GetMapping (value="/free/{id}")
+    @ApiOperation(value = "Get project by id")
+    public ProjectCard getFreeProject(@PathVariable("id") String id){
         return projectServiceImpl.getById(Integer.parseInt(id));
     }
     @PreAuthorize("@UserRole.isUP() OR @UserRole.isLR() OR @UserRole.isRS()")

@@ -42,6 +42,8 @@ public class AuthConfig extends WebSecurityConfigurerAdapter implements WebMvcCo
         protected void configure(HttpSecurity http) throws Exception {
             http
                      .authorizeRequests()
+                    .antMatchers("/api//free/{id}")
+                    .permitAll()
                     .anyRequest().authenticated()
                     .and()
                     .formLogin().successHandler(SuccessHanlerCustom())
