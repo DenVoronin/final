@@ -2,6 +2,7 @@ package hhr.controllers;
 
 
 
+
 import hhr.entity.User;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -26,6 +27,8 @@ import java.io.IOException;
 
 import java.util.ArrayList;
 
+import static hhr.auth.SuccessHandlerCustom.user;
+
 
 @RestController
 @Api(value = "/", description = "User actions")
@@ -45,9 +48,9 @@ public class UserController {
 
     @GetMapping(value="/user/whoami")
     @ApiOperation(value = "Get username and user groups")
-    public void hello1() throws IOException, NamingException {
+    public User hello1() throws IOException, NamingException {
 
-       // return user.getGroups();
+        return user;
 
 
     }
