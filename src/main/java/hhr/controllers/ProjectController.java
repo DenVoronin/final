@@ -7,6 +7,7 @@ import hhr.services.impl.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -39,7 +40,7 @@ public class ProjectController {
         this.projectTypeServiceImpl = projectTypeServiceImpl;
         this.timePlanServiceImpl = timePlanServiceImpl;
     }
-
+    @PreAuthorize("@UserRole.isUP() OR @UserRole.isLR() OR @UserRole.isRS()")
     @GetMapping(value="/")
     @ApiOperation(value = "Enter point. Just return OK")
         public HashMap hello(){
@@ -48,7 +49,7 @@ public class ProjectController {
         map.put("its","ok");
         return map;
         }
-
+    @PreAuthorize("@UserRole.isUP()")
     @PostMapping (value="/project/new")
     @ApiOperation(value = "Create new")
     public int create(@RequestBody ProjectCard projectCard){
@@ -56,24 +57,28 @@ public class ProjectController {
         projectServiceImpl.newProject(projectCard);
         return projectCard.getId();
     }
+    @PreAuthorize("@UserRole.isUP() OR @UserRole.isLR() OR @UserRole.isRS()")
     @GetMapping (value="/project/{id}")
     @ApiOperation(value = "Get project by id")
     public ProjectCard getProject(@PathVariable("id") String id){
         return projectServiceImpl.getById(Integer.parseInt(id));
     }
-
+    @PreAuthorize("@UserRole.isUP() OR @UserRole.isLR() OR @UserRole.isRS()")
     @GetMapping(value="/project")
     @ApiOperation(value = "List of all project")
     public List<ProjectCard> getProjects() {
         return projectServiceImpl.getAllCustom();
     }
 
+    @PreAuthorize("@UserRole.isUP()")
     @GetMapping (value="/project/delete/{id}")
     @ApiOperation(value = "Delete project by id")
     public void deleteProject(@PathVariable("id") String id){
         projectServiceImpl.delete(Integer.parseInt(id));
     }
 
+
+    @PreAuthorize("@UserRole.isUP()")
     @PostMapping (value="/project/edit/{id}")
     @ApiOperation(value = "Edit project by id")
     public void  editProject(@PathVariable("id") String id, @RequestBody ProjectCard projectCard){

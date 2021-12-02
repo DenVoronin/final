@@ -5,6 +5,7 @@ import hhr.repository.CardStatusRepository;
 import hhr.repository.ProjectRepository;
 import hhr.services.CardStatusService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

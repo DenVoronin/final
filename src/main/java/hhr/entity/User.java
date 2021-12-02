@@ -1,17 +1,11 @@
 package hhr.entity;
+import javax.persistence.Entity;
+import java.util.*;
 
-
-import org.springframework.security.core.userdetails.UserDetails;
-
-import java.security.Principal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-public class User  {
+public class User {
     String name;
     ArrayList groups;
-
+    String role;
     public void setName(String name) {
         this.name = name;
     }
@@ -28,9 +22,11 @@ public class User  {
         return groups;
     }
 
+    public String getRole() {
+        return role;
+    }
 
-
-
-
-
+    public void setRole(String role) {
+        this.role = role;
+    }
 }

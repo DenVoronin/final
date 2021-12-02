@@ -3,6 +3,7 @@ package hhr.controllers;
 
 
 
+import hhr.auth.UserRoleCheck;
 import hhr.entity.User;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -10,7 +11,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.ldap.core.LdapTemplate;
 
 
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -25,8 +25,6 @@ import javax.naming.*;
 
 import java.io.IOException;
 
-import java.util.ArrayList;
-
 import static hhr.auth.SuccessHandlerCustom.user;
 
 
@@ -36,8 +34,7 @@ import static hhr.auth.SuccessHandlerCustom.user;
 public class UserController {
 
 @Autowired
-    LdapTemplate ldapTemplate;
-
+UserRoleCheck authComponent;
 
     @GetMapping(value="/")
     @ApiOperation(value = "Hello")
