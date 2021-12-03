@@ -3,7 +3,9 @@ package hhr.auth;
 
 import hhr.config.LdapSearch;
 import hhr.entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.Authentication;
 
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,7 +21,8 @@ import java.io.IOException;
 
 public class SuccessHandlerCustom implements AuthenticationSuccessHandler {
 
-
+@Autowired
+LdapSearch ldapSearch;
 
     @Value("${group.UP}")
     private String up;
@@ -39,7 +42,7 @@ public class SuccessHandlerCustom implements AuthenticationSuccessHandler {
 
 
         user.setName(SecurityContextHolder.getContext().getAuthentication().getName());
-        user.setGroups(new LdapSearch().findGroupsByUsername(user.getName()));
+        user.setGroups(ldapSearch.findGroupsByUsername(user.getName()));
 
 
         if (user.getGroups().contains(up))

@@ -4,6 +4,7 @@ package hhr.controllers;
 
 
 import hhr.auth.UserRoleCheck;
+import hhr.config.LdapSearch;
 import hhr.entity.User;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -35,6 +36,7 @@ public class UserController {
 
 @Autowired
 UserRoleCheck authComponent;
+
 
     @GetMapping(value="/")
     @ApiOperation(value = "Hello")

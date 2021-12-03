@@ -1,5 +1,8 @@
 hhr\entity\DevMethodology.class
+hhr\config\LdapSearch.class
 hhr\config\SwaggerConfig.class
+hhr\controllers\UserController.class
+hhr\entity\User.class
 hhr\controllers\ProjectController.class
 hhr\services\ProjectStageService.class
 hhr\entity\ProjectType.class
@@ -9,6 +12,7 @@ hhr\repository\OvertimesRepository.class
 hhr\services\DevMethodologyService.class
 hhr\services\impl\OvertimesServiceImpl.class
 hhr\controllers\ValuesController.class
+hhr\config\AuthConfig.class
 hhr\repository\CardStatusRepository.class
 hhr\services\impl\ProjectServiceImpl.class
 hhr\services\CardStatusService.class
@@ -22,6 +26,8 @@ hhr\services\impl\ProjectStageServiceImpl.class
 hhr\services\impl\ProjectTypeServiceImpl.class
 hhr\repository\TimePlanRepository.class
 hhr\entity\ProjectStage.class
+hhr\auth\UserRoleCheck.class
+hhr\auth\SuccessHandlerCustom.class
 hhr\services\impl\TimePlanServiceImpl.class
 hhr\services\impl\DevMethodologyServiceImpl.class
 hhr\services\OvertimesService.class

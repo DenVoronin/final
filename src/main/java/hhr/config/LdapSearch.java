@@ -1,7 +1,14 @@
 package hhr.config;
+import hhr.auth.SuccessHandlerCustom;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Bean;
+
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.stereotype.Component;
+
+
+import javax.annotation.PostConstruct;
 import javax.naming.AuthenticationNotSupportedException;
 import javax.naming.Context;
 import javax.naming.NamingEnumeration;
@@ -10,7 +17,13 @@ import javax.naming.directory.*;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
-public class LdapSearch {
+
+
+
+@Component
+public class LdapSearch  {
+
+
 
     private SearchControls getSimpleSearchControls() {
         SearchControls searchControls = new SearchControls();
@@ -20,15 +33,35 @@ public class LdapSearch {
         return searchControls;
     }
 
+
+    @Value("${ldap.urls}")
+    private String ldapUrls;
+
+    @Value("${ldap.base.dn}")
+    private String ldapBaseDn;
+
+    @Value("${ldap.username}")
+    private String ldapSecurityPrincipal;
+
+    @Value("${ldap.password}")
+    private String ldapPrincipalPassword;
+
+    @Value("${ldap.user.dn.pattern}")
+    private String ldapUserDnPattern;
+
+
+
+
      private Hashtable init(){
-         String url = "ldap://localhost:389";
+
+
 
          Hashtable env = new Hashtable();
          env.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
-         env.put(Context.PROVIDER_URL, url);
+         env.put(Context.PROVIDER_URL, ldapUrls );
          env.put(Context.SECURITY_AUTHENTICATION, "simple");
-         env.put(Context.SECURITY_PRINCIPAL, "cn=Manager,dc=maxcrc,dc=com");
-         env.put(Context.SECURITY_CREDENTIALS, "secret");
+         env.put(Context.SECURITY_PRINCIPAL, ldapSecurityPrincipal );
+         env.put(Context.SECURITY_CREDENTIALS, ldapPrincipalPassword);
 
         return env;
      }

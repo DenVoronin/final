@@ -13,6 +13,9 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import javax.naming.Context;
+import java.util.Hashtable;
+
 @Configuration
 @EnableWebSecurity
 public class AuthConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
@@ -32,10 +35,13 @@ public class AuthConfig extends WebSecurityConfigurerAdapter implements WebMvcCo
     private String ldapUserDnPattern;
 
 
+
     @Bean
     public AuthenticationSuccessHandler SuccessHanlerCustom(){
         return new SuccessHandlerCustom();
     }
+
+
 
     @Override
 
