@@ -43,6 +43,9 @@ create table card_status (id int not null primary key auto_increment, name varch
 create table project_stage (id int not null primary key auto_increment, name varchar (200) not null);
 create table project_type (id int not null primary key auto_increment, name varchar (200) not null);
 create table time_plan (id int not null primary key auto_increment, name varchar (200) not null);
+create table changes (id int not null, name text);
+
+
 
 insert card_status(name) values("Новая");
 insert card_status(name) values("Черновик");

@@ -22,4 +22,12 @@ public class CardStatus {
     public int getId() {
         return id;
     }
+
+    @Override
+    public String toString() {
+        return "CardStatus{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

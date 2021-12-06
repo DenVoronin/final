@@ -1,5 +1,6 @@
 package hhr.controllers;
 
+import hhr.entity.Changes;
 import hhr.entity.ProjectCard;
 import hhr.entity.TimePlan;
 import hhr.services.OvertimesService;
@@ -26,11 +27,12 @@ public class ProjectController {
     private ProjectStageServiceImpl projectStageServiceImpl;
     private ProjectTypeServiceImpl projectTypeServiceImpl;
     private TimePlanServiceImpl timePlanServiceImpl;
+    private ChangesServiceImpl changesServiceImpl;
     @Autowired
     ProjectController(ProjectServiceImpl projectServiceImpl, CardStatusServiceImpl cardStatusServiceImpl,
                       DevMethodologyServiceImpl devMethodologyServiceImpl, OvertimesServiceImpl overtimesServiceImpl,
                       ProjectStageServiceImpl projectStageServiceImpl, ProjectTypeServiceImpl projectTypeServiceImpl,
-                      TimePlanServiceImpl timePlanServiceImpl){
+                      TimePlanServiceImpl timePlanServiceImpl, ChangesServiceImpl changesServiceImpl){
 
         this.projectServiceImpl = projectServiceImpl;
         this.cardStatusServiceImpl = cardStatusServiceImpl;
@@ -39,6 +41,7 @@ public class ProjectController {
         this.projectStageServiceImpl = projectStageServiceImpl;
         this.projectTypeServiceImpl = projectTypeServiceImpl;
         this.timePlanServiceImpl = timePlanServiceImpl;
+        this.changesServiceImpl = changesServiceImpl;
     }
     @PreAuthorize("@UserRole.isUP() OR @UserRole.isLR() OR @UserRole.isRS()")
     @GetMapping(value="/")
@@ -66,8 +69,10 @@ public class ProjectController {
 
     @GetMapping (value="/free/{id}")
     @ApiOperation(value = "Get FREE project by id")
-    public ProjectCard getFreeProject(@PathVariable("id") String id){
+    public ProjectCard getFreeProject(@PathVariable("id") String id)  {
+
         return projectServiceImpl.getById(Integer.parseInt(id));
+
     }
     @PreAuthorize("@UserRole.isUP() OR @UserRole.isLR() OR @UserRole.isRS()")
     @GetMapping(value="/project")
@@ -87,9 +92,21 @@ public class ProjectController {
     @PreAuthorize("@UserRole.isUP()")
     @PostMapping (value="/project/edit/{id}")
     @ApiOperation(value = "Edit project by id")
-    public void  editProject(@PathVariable("id") String id, @RequestBody ProjectCard projectCard){
+    public void  editProject(@PathVariable("id") String id, @RequestBody ProjectCard projectCard) throws NoSuchFieldException, IllegalAccessException {
         projectCard.setId(Integer.parseInt(id));
+        Changes changes = new Changes();
+        changes.setId(Integer.parseInt(id));
+        changes.setName(projectServiceImpl.getById(Integer.parseInt(id)).equalsCustom(projectCard).toString());
+        changesServiceImpl.newChanges(changes);
         projectServiceImpl.edit(projectCard);
+
+    }
+
+    @GetMapping (value="project/history/{id}")
+    @ApiOperation(value = "Get history of project by id")
+    public Changes getHistory(@PathVariable("id") String id)  {
+
+        return changesServiceImpl.getById(Integer.parseInt(id));
 
     }
 }

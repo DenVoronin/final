@@ -22,4 +22,12 @@ ProjectType(){}
     public String getName() {
         return name;
     }
+
+    @Override
+    public String toString() {
+        return "ProjectType{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

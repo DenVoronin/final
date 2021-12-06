@@ -79,7 +79,7 @@ public class LdapSearch  {
 
 
          NamingEnumeration<?> namingEnum = ctx.search(
-                 "ou=People,dc=maxcrc,dc=com", "(objectclass=posixGroup)",
+                 ldapBaseDn, "(objectclass=posixGroup)",
                  getSimpleSearchControls());
          while (namingEnum.hasMore()) {
              SearchResult result = (SearchResult) namingEnum.next();

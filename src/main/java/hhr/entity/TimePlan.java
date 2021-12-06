@@ -22,4 +22,12 @@ TimePlan(){}
     public String getName() {
         return name;
     }
+
+    @Override
+    public String toString() {
+        return "TimePlan{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

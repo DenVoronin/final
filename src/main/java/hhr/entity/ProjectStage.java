@@ -23,4 +23,12 @@ ProjectStage(){}
     public String getName() {
         return name;
     }
+
+    @Override
+    public String toString() {
+        return "ProjectStage{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

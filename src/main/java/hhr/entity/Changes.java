@@ -3,14 +3,14 @@ package hhr.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "dev_methodology")
-public class DevMethodology {
+@Table(name = "changes")
+public class Changes {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
+    @Column(length = 65535,columnDefinition="Text")
     String name;
-DevMethodology(){}
-    DevMethodology(int id, String name){
+    public Changes(){}
+    Changes(int id, String name){
         this.id = id;
         this.name=name;
     }
@@ -25,9 +25,17 @@ DevMethodology(){}
 
     @Override
     public String toString() {
-        return "DevMethodology{" +
+        return "Changes{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

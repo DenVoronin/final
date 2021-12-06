@@ -1,7 +1,12 @@
 package hhr.entity;
 
+import org.thymeleaf.spring5.expression.Fields;
+
 import javax.persistence.*;
+import java.lang.reflect.Field;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
 
 @Entity
 @Table(name = "project")
@@ -191,4 +196,63 @@ public class ProjectCard {
     public String getAuthor() {
         return author;
     }
+
+
+    public ArrayList<String> equalsCustom(ProjectCard p) throws IllegalAccessException, NoSuchFieldException {
+
+        ArrayList<String> changes = new ArrayList<>();
+
+        Field[] thisField = this.getClass().getDeclaredFields();
+        Field[] pField = p.getClass().getDeclaredFields();
+
+        for(Field f : thisField ){
+          System.out.println(f.getType().toString());
+          if ((f.getType().toString().contains("TimePlan")) ||
+                  (f.getType().toString().contains("Overtimes")) ||
+            (f.getType().toString().contains("DevMethodology")) ||
+                  (f.getType().toString().contains("ProjectStage")) ||
+                  (f.getType().toString().contains("ProjectType")) ||
+                  (f.getType().toString().contains("CardStatus")))
+          {
+              if (f.getName().contains("timeplan"))
+              {
+                  if (this.timeplan.id != p.timeplan.id){
+                  changes.add(LocalDate.now()+" " +f.getName() +" "+p.getClass().getDeclaredField(f.getName()).get(p).toString());
+              }}
+              if (f.getName().contains("overtimes"))
+              {
+                  if (this.overtimes.id != p.overtimes.id){
+                      changes.add(LocalDate.now()+" " +f.getName() +" "+p.getClass().getDeclaredField(f.getName()).get(p).toString());
+                  }}
+              if (f.getName().contains("devMethod"))
+              {
+                  if (this.devMethod.id != p.devMethod.id){
+                      changes.add(LocalDate.now()+" " +f.getName() +" "+p.getClass().getDeclaredField(f.getName()).get(p).toString());
+                  }}
+              if (f.getName().contains("stage"))
+              {
+                  if (this.stage.id != p.stage.id){
+                      changes.add(LocalDate.now()+" " +f.getName() +" "+p.getClass().getDeclaredField(f.getName()).get(p).toString());
+                  }}
+              if (f.getName().contains("projectType"))
+              {
+                  if (this.projectType.id != p.projectType.id){
+                      changes.add(LocalDate.now()+" " +f.getName() +" "+p.getClass().getDeclaredField(f.getName()).get(p).toString());
+                  }}
+              if (f.getName().contains("cardStatus"))
+              {
+                  if (this.cardStatus.id != p.cardStatus.id){
+                      changes.add(LocalDate.now()+" " +f.getName() +" "+p.getClass().getDeclaredField(f.getName()).get(p).toString());
+                  }}
+          } else
+            if (!f.get(this).equals(p.getClass().getDeclaredField(f.getName()).get(p))
+            ) {
+                changes.add(LocalDate.now()+" " +f.getName() +" "+p.getClass().getDeclaredField(f.getName()).get(p).toString());
+            }
+
+
+        }
+        return changes;
+    }
+
 }
