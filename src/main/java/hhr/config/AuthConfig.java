@@ -49,10 +49,14 @@ public class AuthConfig extends WebSecurityConfigurerAdapter implements WebMvcCo
             http
                      .authorizeRequests()
                     .antMatchers("/api//free/{id}")
+
                     .permitAll()
-                    .anyRequest().authenticated()
+
+                    .anyRequest()
+                    .authenticated()
                     .and()
                     .formLogin().successHandler(SuccessHanlerCustom())
+
                     .and()
                     .cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues())
                     .and()

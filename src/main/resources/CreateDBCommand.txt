@@ -1,3 +1,4 @@
+(mysql)
 create database hhr;
 
 create table project
@@ -77,3 +78,57 @@ insert time_plan(name) values("Сдвиг по времени");
 
 insert overtimes(name) values("Редкие");
 insert overtimes(name) values("Постоянные");
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+(psql)
+
+ccreate database hhr;
+create sequence project_seq;
+
+create table project (id int not null primary key default nextval ('project_seq'), client varchar (100) not null, card_status int, FOREIGN KEY (card_status) REFERENCES card_status (Id), project_type int, FOREIGN KEY (project_type) REFERENCES project_type (Id), name varchar (200) not null, author varchar (200), func_area text, subject_area text, description text not null, tasks text not null, stage int, FOREIGN KEY (stage) REFERENCES project_stage (Id), dead_line date not null, technoligies text not null, dev_method int, FOREIGN KEY (dev_method) REFERENCES dev_methodology (Id), stake_holders varchar (200), product boolean not null, analitics int not null, devs int not null, testers boolean not null, tech_writers boolean not null, team int not null, location text, timeplan int, FOREIGN KEY (timeplan) REFERENCES time_plan (Id), deadline_hr date not null, overtimes int, FOREIGN KEY (overtimes) REFERENCES overtimes (Id), hr_details text not null, gost boolean not null);
+
+create sequence dev_methodology_seq;
+create table dev_methodology (id int not null primary key default nextval ('dev_methodology_seq'), name varchar (200) not null);
+create sequence overtimes_seq;
+create table overtimes (id int not null primary key default nextval ('overtimes_seq'), name varchar (200) not null);
+create sequence card_status_seq;
+create table card_status (id int not null primary key default nextval ('card_status_seq'), name varchar (200) not null);
+create sequence project_stage_seq;
+create table project_stage (id int not null primary key default nextval ('project_stage_seq'), name varchar (200) not null);
+create sequence project_type_seq;
+create table project_type (id int not null primary key default nextval ('project_type_seq'), name varchar (200) not null);
+create sequence time_plan_seq;
+create table time_plan (id int not null primary key default nextval ('time_plan_seq'), name varchar (200) not null);
+create table changes (id int not null , name varchar (200) not null);
+
+insert into card_status(name) values('Новая');
+insert into card_status(name) values('Черновик');
+insert into card_status(name) values('Сохранена');
+insert into card_status(name) values('В архиве');
+insert into card_status(name) values('Переоткрыта');
+insert into card_status(name) values('Закрыта');
+
+insert into project_type(name) values('Фикс');
+insert into project_type(name) values('Т и М');
+insert into project_type(name) values('ПО');
+insert into project_type(name) values('ПАК');
+insert into project_type(name) values('MVP');
+insert into project_type(name) values('Новая система');
+insert into project_type(name) values('Модернизация существующей системы');
+
+insert into project_stage(name) values('Инициация');
+insert into project_stage(name) values('Начало');
+insert into project_stage(name) values('Середина');
+insert into project_stage(name) values('Завершение');
+
+insert into dev_methodology(name) values('Waterfall Model');
+insert into dev_methodology(name) values('Incremental Model');
+insert into dev_methodology(name) values('Agile Model');
+insert into dev_methodology(name) values('Spiral Model');
+
+insert into time_plan(name) values('Строго по графику');
+insert into time_plan(name) values('Сдвиг по времени');
+
+insert into overtimes(name) values('Редкие');
+insert into overtimes(name) values('Постоянные');
