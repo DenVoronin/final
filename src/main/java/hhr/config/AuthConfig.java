@@ -46,7 +46,7 @@ public class AuthConfig extends WebSecurityConfigurerAdapter implements WebMvcCo
     @Override
 
         protected void configure(HttpSecurity http) throws Exception {
-            http
+           /* http
                      .authorizeRequests()
                     .antMatchers("/api//free/{id}")
 
@@ -56,6 +56,10 @@ public class AuthConfig extends WebSecurityConfigurerAdapter implements WebMvcCo
                     .authenticated()
                     .and()
                     .formLogin().successHandler(SuccessHanlerCustom())
+*/
+        http
+                .authorizeRequests()
+                .antMatchers("/**").permitAll()
 
                     .and()
                     .cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues())

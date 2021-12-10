@@ -3,6 +3,7 @@ package hhr.controllers;
 import hhr.entity.Changes;
 import hhr.entity.ProjectCard;
 import hhr.entity.TimePlan;
+import hhr.services.Email;
 import hhr.services.OvertimesService;
 import hhr.services.impl.*;
 import io.swagger.annotations.Api;
@@ -11,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -28,11 +31,12 @@ public class ProjectController {
     private ProjectTypeServiceImpl projectTypeServiceImpl;
     private TimePlanServiceImpl timePlanServiceImpl;
     private ChangesServiceImpl changesServiceImpl;
+    private Email email;
     @Autowired
     ProjectController(ProjectServiceImpl projectServiceImpl, CardStatusServiceImpl cardStatusServiceImpl,
                       DevMethodologyServiceImpl devMethodologyServiceImpl, OvertimesServiceImpl overtimesServiceImpl,
                       ProjectStageServiceImpl projectStageServiceImpl, ProjectTypeServiceImpl projectTypeServiceImpl,
-                      TimePlanServiceImpl timePlanServiceImpl, ChangesServiceImpl changesServiceImpl){
+                      TimePlanServiceImpl timePlanServiceImpl, ChangesServiceImpl changesServiceImpl, Email email){
 
         this.projectServiceImpl = projectServiceImpl;
         this.cardStatusServiceImpl = cardStatusServiceImpl;
@@ -42,8 +46,9 @@ public class ProjectController {
         this.projectTypeServiceImpl = projectTypeServiceImpl;
         this.timePlanServiceImpl = timePlanServiceImpl;
         this.changesServiceImpl = changesServiceImpl;
+        this.email = email;
     }
-    @PreAuthorize("@UserRole.isUP() OR @UserRole.isLR() OR @UserRole.isRS()")
+  //  @PreAuthorize("@UserRole.isUP() OR @UserRole.isLR() OR @UserRole.isRS()")
     @GetMapping(value="/")
     @ApiOperation(value = "Enter point. Just return OK")
         public HashMap hello(){
@@ -52,7 +57,7 @@ public class ProjectController {
         map.put("its","ok");
         return map;
         }
-    @PreAuthorize("@UserRole.isUP()")
+  //  @PreAuthorize("@UserRole.isUP()")
     @PostMapping (value="/project/new")
     @ApiOperation(value = "Create new")
     public int create(@RequestBody ProjectCard projectCard){
@@ -60,7 +65,7 @@ public class ProjectController {
         projectServiceImpl.newProject(projectCard);
         return projectCard.getId();
     }
-    @PreAuthorize("@UserRole.isUP() OR @UserRole.isLR() OR @UserRole.isRS()")
+  //  @PreAuthorize("@UserRole.isUP() OR @UserRole.isLR() OR @UserRole.isRS()")
     @GetMapping (value="/project/{id}")
     @ApiOperation(value = "Get  project by id")
     public ProjectCard getProject(@PathVariable("id") String id){
@@ -74,14 +79,14 @@ public class ProjectController {
         return projectServiceImpl.getById(Integer.parseInt(id));
 
     }
-    @PreAuthorize("@UserRole.isUP() OR @UserRole.isLR() OR @UserRole.isRS()")
+  //  @PreAuthorize("@UserRole.isUP() OR @UserRole.isLR() OR @UserRole.isRS()")
     @GetMapping(value="/project")
     @ApiOperation(value = "List of all project")
     public List<ProjectCard> getProjects() {
         return projectServiceImpl.getAllCustom();
     }
 
-    @PreAuthorize("@UserRole.isUP()")
+   // @PreAuthorize("@UserRole.isUP()")
     @GetMapping (value="/project/delete/{id}")
     @ApiOperation(value = "Delete project by id")
     public void deleteProject(@PathVariable("id") String id){
@@ -89,7 +94,7 @@ public class ProjectController {
     }
 
 
-    @PreAuthorize("@UserRole.isUP()")
+   // @PreAuthorize("@UserRole.isUP()")
     @PostMapping (value="/project/edit/{id}")
     @ApiOperation(value = "Edit project by id")
     public void  editProject(@PathVariable("id") String id, @RequestBody ProjectCard projectCard) throws NoSuchFieldException, IllegalAccessException {
@@ -109,4 +114,33 @@ public class ProjectController {
         return changesServiceImpl.getById(Integer.parseInt(id));
 
     }
+
+    //  @PreAuthorize("@UserRole.isUP()")
+    @PostMapping (value="/project/find")
+    @ApiOperation(value = "Find cards by param")
+    public List<ProjectCard> findCards(@RequestBody String data) throws NoSuchFieldException, IllegalAccessException {
+          String param;
+          String value;
+          param = data.substring(data.indexOf("{\"")+2,data.indexOf(":")-1);
+          value = data.substring(data.indexOf(":")+2,data.indexOf("\"}"));
+
+        if (new ProjectCard().findField(param)) {
+            System.out.println(param + " " + value);
+            return projectServiceImpl.findCustom(param,value);
+        }
+
+
+        List<ProjectCard> o = null;
+        return o;
+    }
+
+    @PostMapping (value="/project/mail")
+    @ApiOperation(value = "Send email")
+    public void sendEmail(@RequestBody String mail) {
+        email.sendSimpleEmail(mail, "проверка", "http://group03-front.apps.ocp.trainee.ru.com/");
+
+    }
+
+
+
 }

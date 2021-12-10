@@ -13,61 +13,61 @@ import java.util.Date;
 public class ProjectCard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id; // ID проекта
-    String author;// Автор карточки
-    String client; // Кто заказчик проекта
+    public  int id; // ID проекта
+    public  String author;// Автор карточки
+    public  String client; // Кто заказчик проекта
     @OneToOne(optional = false, cascade = CascadeType.MERGE)
     @JoinColumn(name = "card_status")
-    CardStatus cardStatus; // Статус карточки
+    public  CardStatus cardStatus; // Статус карточки
     @OneToOne(optional = false, cascade = CascadeType.MERGE)
     @JoinColumn(name = "project_type")
-    ProjectType projectType; // Тип проекта
-    String name; // Наименование проекта
+    public  ProjectType projectType; // Тип проекта
+    public  String name; // Наименование проекта
     @Basic
     @Column(name = "func_area",length = 65535,columnDefinition="Text")
-    String funcArea; // Функциональное направление
+    public   String funcArea; // Функциональное направление
     @Basic
     @Column(name = "subject_area", length = 65535,columnDefinition="Text")
-    String subjectArea; // Предметная область проекта
+    public  String subjectArea; // Предметная область проекта
     @Column(length = 65535,columnDefinition="Text")
-    String description; // Описание проекта
+    public  String description; // Описание проекта
     @Column(length = 65535,columnDefinition="Text")
-    String tasks; // Задачи, которые придется решать на проекте
+    public  String tasks; // Задачи, которые придется решать на проекте
     @OneToOne(optional = false, cascade = CascadeType.MERGE)
     @JoinColumn(name = "stage")
-    ProjectStage stage; // Стадия проекта
+    public  ProjectStage stage; // Стадия проекта
     @Basic
     @Column(name = "dead_line")
-    LocalDate deadLine; // Срок завершения проекта
+    public   LocalDate deadLine; // Срок завершения проекта
     @Column(length = 65535,columnDefinition="Text")
-    String technoligies; // Технологии
+    public  String technoligies; // Технологии
     @OneToOne(optional = false, cascade = CascadeType.MERGE)
     @JoinColumn(name = "dev_method")
-    DevMethodology devMethod; // Методология разработки
-    String stakeHolders; //Сколько стейкхолдеров на проекте
-    Boolean product; // Продуктовая разработка
-    int analitics; // Количество аналитиков
-    int devs; // Количество разработчиков
-    Boolean testers; // Тестировщики
-    Boolean techWriters; // Техписы
+    public DevMethodology devMethod; // Методология разработки
+    public  String stakeHolders; //Сколько стейкхолдеров на проекте
+    public  Boolean product; // Продуктовая разработка
+    public  int analitics; // Количество аналитиков
+    public   int devs; // Количество разработчиков
+    public   Boolean testers; // Тестировщики
+    public Boolean techWriters; // Техписы
     int team; // Количесво людей в команде
     @Column(length = 65535,columnDefinition="Text")
-    String location; // Локация
+    public  String location; // Локация
     @OneToOne(optional = false, cascade = CascadeType.MERGE)
     @JoinColumn(name = "timeplan")
-    TimePlan timeplan; // График времени
+    public TimePlan timeplan; // График времени
     @Basic
     @Column(name = "deadline_hr")
-    LocalDate deadlineHR; // Дата вывода людей на проект
+    public LocalDate deadlineHR; // Дата вывода людей на проект
     @OneToOne(optional = false, cascade = CascadeType.MERGE)
     @JoinColumn(name = "overtimes")
-    Overtimes overtimes; // Овертаймы
+    public  Overtimes overtimes; // Овертаймы
     @Column(name = "hr_details",length = 65535,columnDefinition="Text")
-    String hrDetails; // Процедура вывода людей
-    Boolean gost; // Будет ли документирование по ГОСТ
+    public  String hrDetails; // Процедура вывода людей
+    public  Boolean gost; // Будет ли документирование по ГОСТ
 
 
-    ProjectCard(){}
+    public ProjectCard(){}
 
     public void setId(int id) {
         this.id = id;
@@ -254,5 +254,9 @@ public class ProjectCard {
         }
         return changes;
     }
+       public Boolean findField (String field) throws NoSuchFieldException {
 
+
+        return ProjectCard.class.getDeclaredField(field).getName().equals(field);
+       }
 }

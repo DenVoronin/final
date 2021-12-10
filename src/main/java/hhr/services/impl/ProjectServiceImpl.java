@@ -71,5 +71,53 @@ public class ProjectServiceImpl implements ProjectService {
           return list1;
     }
 
+    public List<ProjectCard> findCustom(String param, String value) throws NoSuchFieldException, IllegalAccessException {
+        ArrayList<ProjectCard> lists = (ArrayList<ProjectCard>) projectRepository.findAll();
+        List<ProjectCard> lists1 = new ArrayList<>();
+        for (int i = 0; i<lists.size(); i++){
+            if (lists.get(i).getClass().getDeclaredField(param).getName().equals("cardStatus")){
+                if (lists.get(i).cardStatus.getName().equals(value)){
+                    lists1.add(lists.get(i));
+                }
+            }
+
+            if (lists.get(i).getClass().getDeclaredField(param).getName().equals("projectType")){
+                if (lists.get(i).projectType.getName().equals(value)){
+                    lists1.add(lists.get(i));
+                }
+            }
+
+            if (lists.get(i).getClass().getDeclaredField(param).getName().equals("stage")){
+                if (lists.get(i).stage.getName().equals(value)){
+                    lists1.add(lists.get(i));
+                }
+            }
+
+            if (lists.get(i).getClass().getDeclaredField(param).getName().equals("devMethod")){
+                if (lists.get(i).devMethod.getName().equals(value)){
+                    lists1.add(lists.get(i));
+                }
+            }
+
+            if (lists.get(i).getClass().getDeclaredField(param).getName().equals("timeplan")){
+                if (lists.get(i).timeplan.getName().equals(value)){
+                    lists1.add(lists.get(i));
+                }
+            }
+
+            if (lists.get(i).getClass().getDeclaredField(param).getName().equals("overtimes")){
+                if (lists.get(i).overtimes.getName().equals(value)){
+                    lists1.add(lists.get(i));
+                }
+            }
+
+            if (lists.get(i).getClass().getDeclaredField(param).get(lists.get(i)).toString().equals(value)){
+                lists1.add(lists.get(i));
+            }
+
+        }
+
+        return lists1;
+    }
 
 }

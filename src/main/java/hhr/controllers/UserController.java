@@ -59,4 +59,6 @@ UserRoleCheck authComponent;
         SecurityContextHolder.clearContext();
         return HttpStatus.OK;
     }
+
+
 }
