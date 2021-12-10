@@ -1,8 +1,6 @@
 package hhr.controllers;
 
-import hhr.entity.Changes;
-import hhr.entity.ProjectCard;
-import hhr.entity.TimePlan;
+import hhr.entity.*;
 import hhr.services.Email;
 import hhr.services.OvertimesService;
 import hhr.services.impl.*;
@@ -118,15 +116,12 @@ public class ProjectController {
     //  @PreAuthorize("@UserRole.isUP()")
     @PostMapping (value="/project/find")
     @ApiOperation(value = "Find cards by param")
-    public List<ProjectCard> findCards(@RequestBody String data) throws NoSuchFieldException, IllegalAccessException {
-          String param;
-          String value;
-          param = data.substring(data.indexOf("{\"")+2,data.indexOf(":")-1);
-          value = data.substring(data.indexOf(":")+2,data.indexOf("\"}"));
+    public List<ProjectCard> findCards(@RequestBody FindHelper data) throws NoSuchFieldException, IllegalAccessException {
 
-        if (new ProjectCard().findField(param)) {
-            System.out.println(param + " " + value);
-            return projectServiceImpl.findCustom(param,value);
+
+        if (new ProjectCard().findField(data.getParam())) {
+
+            return projectServiceImpl.findCustom(data.getParam(), data.getValue());
         }
 
 
@@ -136,8 +131,9 @@ public class ProjectController {
 
     @PostMapping (value="/project/mail")
     @ApiOperation(value = "Send email")
-    public void sendEmail(@RequestBody String mail) {
-        email.sendSimpleEmail(mail, "проверка", "http://group03-front.apps.ocp.trainee.ru.com/");
+    public void sendEmail(@RequestBody MailHelper data) {
+
+        email.sendSimpleEmail(data.getMail(), data.getSubject(), data.getMessage());
 
     }
 
