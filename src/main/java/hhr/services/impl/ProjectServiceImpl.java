@@ -61,11 +61,11 @@ public class ProjectServiceImpl implements ProjectService {
            map.put("name",cards.getName());
            map.put("client",cards.getClient());
            map.put("funcArea",cards.getFuncArea());
-           map.put("devMethod",cards.getDevMethod());
            map.put("deadlineHR",cards.getDeadlineHR());
-           map.put("gost",cards.getGost());
            map.put("cardStatus",cards.getCardStatus());
            map.put("author",cards.getAuthor());
+           map.put("subjectArea",cards.getSubjectArea());
+           map.put("stage",cards.getStage());
            list1.add(map);
             }
           return list1;
