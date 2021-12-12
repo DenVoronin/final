@@ -47,16 +47,19 @@ public class ProjectCard {
     @JoinColumn(name = "product")
     public  Product product; // Продуктовая разработка
     public  int analitics; // Количество аналитиков
+    public   int back; // Количество бек разработчиков
+    public   int front; // Количество фронт разработчиков
     public   int devs; // Количество разработчиков
     public   Boolean testers; // Тестировщики
     public Boolean techWriters; // Техписы
     int team; // Количесво людей в команде
-    @Column(length = 65535,columnDefinition="Text")
-    public  String location; // Локация
+    @OneToOne(optional = false, cascade = CascadeType.MERGE)
+    @JoinColumn(name = "location")
+    public  Location location; // Локация
     @OneToOne(optional = false, cascade = CascadeType.MERGE)
     @JoinColumn(name = "timeplan")
     public TimePlan timeplan; // График времени
-
+    public String adress; // Адресс
     @OneToOne(optional = false, cascade = CascadeType.MERGE)
     @JoinColumn(name = "pay")
     public Pay pay; // Оплата
@@ -117,7 +120,17 @@ public class ProjectCard {
         return mvp;
     }
 
+    public int getBack() {
+        return back;
+    }
 
+    public int getFront() {
+        return front;
+    }
+
+    public String getAdress() {
+        return adress;
+    }
 
     public String getName() {
         return name;
@@ -184,7 +197,7 @@ public class ProjectCard {
     }
 
     public String getLocation() {
-        return location;
+        return location.name;
     }
 
     public String getTimeplan() {

@@ -107,13 +107,17 @@ technoligies text not null,
 dev_method int,
 FOREIGN KEY (dev_method) REFERENCES dev_methodology (Id),
 stake_holders varchar (200),
+adress varchar (200),
 analitics int not null,
 devs int not null,
+back int not null,
+front int not null,
 testers boolean not null,
 mvp boolean not null,
 tech_writers boolean not null,
 team int not null,
-location text,
+location int,
+FOREIGN KEY (location) REFERENCES location (Id),
 product int,
 FOREIGN KEY (product) REFERENCES product (Id),
 timeplan int,
@@ -141,9 +145,14 @@ create sequence category_seq;
 create table category (id int not null primary key default nextval ('category_seq'), name varchar (200) not null);
 create sequence product_seq;
 create table product (id int not null primary key default nextval ('product_seq'), name varchar (200) not null);
+create sequence location_seq;
+create table location (id int not null primary key default nextval ('location_seq'), name varchar (200) not null);
 
 insert into product(name) values('Продуктовая');
 insert into product(name) values('Проектная');
+
+insert into location(name) values('Удаленно');
+insert into location(name) values('В офисе');
 
 insert into card_status(name) values('Новая');
 insert into card_status(name) values('Черновик');

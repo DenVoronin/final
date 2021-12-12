@@ -123,6 +123,12 @@ public class ProjectServiceImpl implements ProjectService {
                 }
             }
 
+            if (lists.get(i).getClass().getDeclaredField(param).getName().equals("location")){
+                if (lists.get(i).location.getName().equals(value)){
+                    lists1.add(lists.get(i));
+                }
+            }
+
             if (lists.get(i).getClass().getDeclaredField(param).getName().equals("overtimes")){
                 if (lists.get(i).overtimes.getName().equals(value)){
                     lists1.add(lists.get(i));

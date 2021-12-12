@@ -25,9 +25,9 @@ public class ValuesController {
     private  ProductServiceImpl productServiceImpl;
     private PayServiceImpl payServiceImpl;
     private ProjCatServiceImpl projCatServiceImpl;
+    private LocationServiceImpl locationServiceImpl;
 
-
-    ValuesController(CardStatusServiceImpl cardStatusServiceImpl,ProductServiceImpl productServiceImpl,
+    ValuesController(CardStatusServiceImpl cardStatusServiceImpl,ProductServiceImpl productServiceImpl,LocationServiceImpl locationServiceImpl,
                       DevMethodologyServiceImpl devMethodologyServiceImpl, OvertimesServiceImpl overtimesServiceImpl,
                       ProjectStageServiceImpl projectStageServiceImpl, ProjectTypeServiceImpl projectTypeServiceImpl,
                       TimePlanServiceImpl timePlanServiceImpl,PayServiceImpl payServiceImpl,ProjCatServiceImpl projCatServiceImpl){
@@ -42,6 +42,7 @@ public class ValuesController {
         this.payServiceImpl = payServiceImpl;
         this.projCatServiceImpl=projCatServiceImpl;
         this.productServiceImpl=productServiceImpl;
+        this.locationServiceImpl = locationServiceImpl;
     }
     @GetMapping(value="/card_status")
     @ApiOperation(value = "List of card status")
@@ -49,6 +50,11 @@ public class ValuesController {
         return cardStatusServiceImpl.getAll();
     }
 
+    @GetMapping(value="/location")
+    @ApiOperation(value = "List of location")
+    public List<Location> getloc(){
+        return locationServiceImpl.getAll();
+    }
 
     @GetMapping(value="/product")
     @ApiOperation(value = "List of development(product)")
