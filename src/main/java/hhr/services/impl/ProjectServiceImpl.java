@@ -93,8 +93,26 @@ public class ProjectServiceImpl implements ProjectService {
                 }
             }
 
+            if (lists.get(i).getClass().getDeclaredField(param).getName().equals("pay")){
+                if (lists.get(i).pay.getName().equals(value)){
+                    lists1.add(lists.get(i));
+                }
+            }
+
+            if (lists.get(i).getClass().getDeclaredField(param).getName().equals("category")){
+                if (lists.get(i).category.getName().equals(value)){
+                    lists1.add(lists.get(i));
+                }
+            }
+
             if (lists.get(i).getClass().getDeclaredField(param).getName().equals("devMethod")){
                 if (lists.get(i).devMethod.getName().equals(value)){
+                    lists1.add(lists.get(i));
+                }
+            }
+
+            if (lists.get(i).getClass().getDeclaredField(param).getName().equals("product")){
+                if (lists.get(i).product.getName().equals(value)){
                     lists1.add(lists.get(i));
                 }
             }

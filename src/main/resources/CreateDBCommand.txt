@@ -83,10 +83,44 @@ insert overtimes(name) values("Постоянные");
 
 (psql)
 
-ccreate database hhr;
+create database hhr;
 create sequence project_seq;
 
-create table project (id int not null primary key default nextval ('project_seq'), client varchar (100) not null, card_status int, FOREIGN KEY (card_status) REFERENCES card_status (Id), project_type int, FOREIGN KEY (project_type) REFERENCES project_type (Id), name varchar (200) not null, author varchar (200), func_area text, subject_area text, description text not null, tasks text not null, stage int, FOREIGN KEY (stage) REFERENCES project_stage (Id), dead_line date not null, technoligies text not null, dev_method int, FOREIGN KEY (dev_method) REFERENCES dev_methodology (Id), stake_holders varchar (200), product boolean not null, analitics int not null, devs int not null, testers boolean not null, tech_writers boolean not null, team int not null, location text, timeplan int, FOREIGN KEY (timeplan) REFERENCES time_plan (Id), deadline_hr date not null, overtimes int, FOREIGN KEY (overtimes) REFERENCES overtimes (Id), hr_details text not null, gost boolean not null);
+create table project (id int not null primary key default nextval ('project_seq'),
+client varchar (100) not null,
+card_status int,
+FOREIGN KEY (card_status) REFERENCES card_status (Id),
+project_type int,
+FOREIGN KEY (project_type) REFERENCES project_type (Id),
+pay int,
+FOREIGN KEY (pay) REFERENCES pay (Id),
+category int,
+FOREIGN KEY (category) REFERENCES category (Id),
+name varchar (200) not null, author varchar (200),
+func_area text,
+subject_area text,
+description text not null,
+tasks text not null, stage int,
+FOREIGN KEY (stage) REFERENCES project_stage (Id),
+dead_line date not null,
+technoligies text not null,
+dev_method int,
+FOREIGN KEY (dev_method) REFERENCES dev_methodology (Id),
+stake_holders varchar (200),
+analitics int not null,
+devs int not null,
+testers boolean not null,
+mvp boolean not null,
+tech_writers boolean not null,
+team int not null,
+location text,
+product int,
+FOREIGN KEY (product) REFERENCES product (Id),
+timeplan int,
+FOREIGN KEY (timeplan) REFERENCES time_plan (Id),
+deadline_hr date not null, overtimes int,
+FOREIGN KEY (overtimes) REFERENCES overtimes (Id),
+hr_details text not null, gost boolean not null);
 
 create sequence dev_methodology_seq;
 create table dev_methodology (id int not null primary key default nextval ('dev_methodology_seq'), name varchar (200) not null);
@@ -101,6 +135,15 @@ create table project_type (id int not null primary key default nextval ('project
 create sequence time_plan_seq;
 create table time_plan (id int not null primary key default nextval ('time_plan_seq'), name varchar (200) not null);
 create table changes (id int not null , name varchar (200) not null);
+create sequence pay_seq;
+create table pay (id int not null primary key default nextval ('pay_seq'), name varchar (200) not null);
+create sequence category_seq;
+create table category (id int not null primary key default nextval ('category_seq'), name varchar (200) not null);
+create sequence product_seq;
+create table product (id int not null primary key default nextval ('product_seq'), name varchar (200) not null);
+
+insert into product(name) values('Продуктовая');
+insert into product(name) values('Проектная');
 
 insert into card_status(name) values('Новая');
 insert into card_status(name) values('Черновик');
@@ -109,13 +152,18 @@ insert into card_status(name) values('В архиве');
 insert into card_status(name) values('Переоткрыта');
 insert into card_status(name) values('Закрыта');
 
-insert into project_type(name) values('Фикс');
-insert into project_type(name) values('Т и М');
+
 insert into project_type(name) values('ПО');
 insert into project_type(name) values('ПАК');
-insert into project_type(name) values('MVP');
-insert into project_type(name) values('Новая система');
-insert into project_type(name) values('Модернизация существующей системы');
+
+
+insert into pay(name) values('Фикс');
+insert into pay(name) values('Тайм материал');
+
+
+insert into category(name) values('С нуля');
+insert into category(name) values('Модернизация существующей системы');
+
 
 insert into project_stage(name) values('Инициация');
 insert into project_stage(name) values('Начало');

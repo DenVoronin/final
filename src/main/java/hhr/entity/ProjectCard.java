@@ -1,12 +1,9 @@
 package hhr.entity;
 
-import org.thymeleaf.spring5.expression.Fields;
-
 import javax.persistence.*;
 import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 @Entity
 @Table(name = "project")
@@ -41,11 +38,14 @@ public class ProjectCard {
     public   LocalDate deadLine; // Срок завершения проекта
     @Column(length = 65535,columnDefinition="Text")
     public  String technoligies; // Технологии
+    public Boolean mvp; //MVP
     @OneToOne(optional = false, cascade = CascadeType.MERGE)
     @JoinColumn(name = "dev_method")
     public DevMethodology devMethod; // Методология разработки
     public  String stakeHolders; //Сколько стейкхолдеров на проекте
-    public  Boolean product; // Продуктовая разработка
+    @OneToOne(optional = false, cascade = CascadeType.MERGE)
+    @JoinColumn(name = "product")
+    public  Product product; // Продуктовая разработка
     public  int analitics; // Количество аналитиков
     public   int devs; // Количество разработчиков
     public   Boolean testers; // Тестировщики
@@ -56,6 +56,15 @@ public class ProjectCard {
     @OneToOne(optional = false, cascade = CascadeType.MERGE)
     @JoinColumn(name = "timeplan")
     public TimePlan timeplan; // График времени
+
+    @OneToOne(optional = false, cascade = CascadeType.MERGE)
+    @JoinColumn(name = "pay")
+    public Pay pay; // Оплата
+
+    @OneToOne(optional = false, cascade = CascadeType.MERGE)
+    @JoinColumn(name = "category")
+    public ProjCat category; // Категория проекта
+
     @Basic
     @Column(name = "deadline_hr")
     public LocalDate deadlineHR; // Дата вывода людей на проект
@@ -104,6 +113,11 @@ public class ProjectCard {
     }
 
 
+    public Boolean getMvp() {
+        return mvp;
+    }
+
+
 
     public String getName() {
         return name;
@@ -145,8 +159,8 @@ public class ProjectCard {
         return stakeHolders;
     }
 
-    public Boolean getProduct() {
-        return product;
+    public String getProduct() {
+        return product.name;
     }
 
     public int getAnalitics() {

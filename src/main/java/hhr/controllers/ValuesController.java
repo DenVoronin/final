@@ -22,11 +22,15 @@ public class ValuesController {
     private ProjectStageServiceImpl projectStageServiceImpl;
     private ProjectTypeServiceImpl projectTypeServiceImpl;
     private TimePlanServiceImpl timePlanServiceImpl;
+    private  ProductServiceImpl productServiceImpl;
+    private PayServiceImpl payServiceImpl;
+    private ProjCatServiceImpl projCatServiceImpl;
 
-    ValuesController(CardStatusServiceImpl cardStatusServiceImpl,
+
+    ValuesController(CardStatusServiceImpl cardStatusServiceImpl,ProductServiceImpl productServiceImpl,
                       DevMethodologyServiceImpl devMethodologyServiceImpl, OvertimesServiceImpl overtimesServiceImpl,
                       ProjectStageServiceImpl projectStageServiceImpl, ProjectTypeServiceImpl projectTypeServiceImpl,
-                      TimePlanServiceImpl timePlanServiceImpl){
+                      TimePlanServiceImpl timePlanServiceImpl,PayServiceImpl payServiceImpl,ProjCatServiceImpl projCatServiceImpl){
 
 
         this.cardStatusServiceImpl = cardStatusServiceImpl;
@@ -35,12 +39,37 @@ public class ValuesController {
         this.projectStageServiceImpl = projectStageServiceImpl;
         this.projectTypeServiceImpl = projectTypeServiceImpl;
         this.timePlanServiceImpl = timePlanServiceImpl;
+        this.payServiceImpl = payServiceImpl;
+        this.projCatServiceImpl=projCatServiceImpl;
+        this.productServiceImpl=productServiceImpl;
     }
     @GetMapping(value="/card_status")
     @ApiOperation(value = "List of card status")
     public List<CardStatus> getcs(){
         return cardStatusServiceImpl.getAll();
     }
+
+
+    @GetMapping(value="/product")
+    @ApiOperation(value = "List of development(product)")
+    public List<Product> getprod(){
+        return productServiceImpl.getAll();
+    }
+
+
+    @GetMapping(value="/pay")
+    @ApiOperation(value = "List of pay")
+    public List<Pay> getpay(){
+        return payServiceImpl.getAll();
+    }
+
+
+    @GetMapping(value="/project_category")
+    @ApiOperation(value = "List of project_category")
+    public List<ProjCat> getpc(){
+        return projCatServiceImpl.getAll();
+    }
+
 
     @GetMapping(value="/dev_method")
     @ApiOperation(value = "List of dev methodology")
