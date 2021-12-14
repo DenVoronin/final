@@ -129,7 +129,7 @@ hr_details text not null, gost boolean not null);
 create sequence dev_methodology_seq;
 create table dev_methodology (id int not null primary key default nextval ('dev_methodology_seq'), name varchar (200) not null);
 create sequence overtimes_seq;
-create table overtimes (id int not null primary key default nextval ('overtimes_seq'), name varchar (200) not null);
+create table overtimes (id int  primary key default nextval ('overtimes_seq'), name varchar (200) not null);
 create sequence card_status_seq;
 create table card_status (id int not null primary key default nextval ('card_status_seq'), name varchar (200) not null);
 create sequence project_stage_seq;
@@ -146,13 +146,16 @@ create table category (id int not null primary key default nextval ('category_se
 create sequence product_seq;
 create table product (id int not null primary key default nextval ('product_seq'), name varchar (200) not null);
 create sequence location_seq;
-create table location (id int not null primary key default nextval ('location_seq'), name varchar (200) not null);
+create table location (id int  primary key default nextval ('location_seq'), name varchar (200) not null);
 
+insert into product(name) values('');
 insert into product(name) values('Продуктовая');
 insert into product(name) values('Проектная');
 
+insert into location(name) values('');
 insert into location(name) values('Удаленно');
 insert into location(name) values('В офисе');
+
 
 insert into card_status(name) values('Новая');
 insert into card_status(name) values('Черновик');
@@ -161,31 +164,34 @@ insert into card_status(name) values('В архиве');
 insert into card_status(name) values('Переоткрыта');
 insert into card_status(name) values('Закрыта');
 
-
+insert into project_type(name) values('');
 insert into project_type(name) values('ПО');
 insert into project_type(name) values('ПАК');
 
-
+insert into pay(name) values('');
 insert into pay(name) values('Фикс');
 insert into pay(name) values('Тайм материал');
 
-
+insert into category(name) values('');
 insert into category(name) values('С нуля');
 insert into category(name) values('Модернизация существующей системы');
 
-
+insert into project_stage(name) values('');
 insert into project_stage(name) values('Инициация');
 insert into project_stage(name) values('Начало');
 insert into project_stage(name) values('Середина');
 insert into project_stage(name) values('Завершение');
 
+insert into dev_methodology(name) values('');
 insert into dev_methodology(name) values('Waterfall Model');
 insert into dev_methodology(name) values('Incremental Model');
 insert into dev_methodology(name) values('Agile Model');
 insert into dev_methodology(name) values('Spiral Model');
 
+insert into time_plan(name) values('');
 insert into time_plan(name) values('Строго по графику');
 insert into time_plan(name) values('Сдвиг по времени');
 
+insert into overtimes(name) values('');
 insert into overtimes(name) values('Редкие');
 insert into overtimes(name) values('Постоянные');
