@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
 
@@ -21,6 +22,7 @@ import java.util.Hashtable;
 
 
 @Component
+
 public class LdapSearch  {
 
 

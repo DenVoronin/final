@@ -1,6 +1,7 @@
 package hhr.config;
 
 import hhr.auth.SuccessHandlerCustom;
+import hhr.entity.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -46,7 +47,7 @@ public class AuthConfig extends WebSecurityConfigurerAdapter implements WebMvcCo
     @Override
 
         protected void configure(HttpSecurity http) throws Exception {
-           /* http
+            http
                      .authorizeRequests()
                     .antMatchers("/api//free/{id}")
 
@@ -56,8 +57,13 @@ public class AuthConfig extends WebSecurityConfigurerAdapter implements WebMvcCo
                     .authenticated()
                     .and()
                     .formLogin().successHandler(SuccessHanlerCustom())
-*/
-        http
+                    .and()
+                    .cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues())
+                    .and()
+                    .csrf()
+                    .disable();
+
+       /* http
                 .authorizeRequests()
                 .antMatchers("/**").permitAll()
 
@@ -65,7 +71,7 @@ public class AuthConfig extends WebSecurityConfigurerAdapter implements WebMvcCo
                     .cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues())
                     .and()
                     .csrf()
-                    .disable();
+                    .disable(); */
 
 
         }

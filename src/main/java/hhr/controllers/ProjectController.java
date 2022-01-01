@@ -46,7 +46,7 @@ public class ProjectController {
         this.changesServiceImpl = changesServiceImpl;
         this.email = email;
     }
-  //  @PreAuthorize("@UserRole.isUP() OR @UserRole.isLR() OR @UserRole.isRS()")
+    @PreAuthorize("@UserRole.isUP() OR @UserRole.isLR() OR @UserRole.isRS()")
     @GetMapping(value="/")
     @ApiOperation(value = "Enter point. Just return OK")
         public HashMap hello(){
@@ -55,7 +55,7 @@ public class ProjectController {
         map.put("its","ok");
         return map;
         }
-  //  @PreAuthorize("@UserRole.isUP()")
+    @PreAuthorize("@UserRole.isUP()")
     @PostMapping (value="/project/new")
     @ApiOperation(value = "Create new")
     public int create(@RequestBody ProjectCard projectCard){
@@ -63,7 +63,7 @@ public class ProjectController {
         projectServiceImpl.newProject(projectCard);
         return projectCard.getId();
     }
-  //  @PreAuthorize("@UserRole.isUP() OR @UserRole.isLR() OR @UserRole.isRS()")
+    @PreAuthorize("@UserRole.isUP() OR @UserRole.isLR() OR @UserRole.isRS()")
     @GetMapping (value="/project/{id}")
     @ApiOperation(value = "Get  project by id")
     public ProjectCard getProject(@PathVariable("id") String id){
@@ -77,14 +77,14 @@ public class ProjectController {
         return projectServiceImpl.getById(Integer.parseInt(id));
 
     }
-  //  @PreAuthorize("@UserRole.isUP() OR @UserRole.isLR() OR @UserRole.isRS()")
+    @PreAuthorize("@UserRole.isUP() OR @UserRole.isLR() OR @UserRole.isRS()")
     @GetMapping(value="/project")
     @ApiOperation(value = "List of all project")
     public List<ProjectCard> getProjects() {
         return projectServiceImpl.getAllCustom();
     }
 
-   // @PreAuthorize("@UserRole.isUP()")
+    @PreAuthorize("@UserRole.isUP()")
     @GetMapping (value="/project/delete/{id}")
     @ApiOperation(value = "Delete project by id")
     public void deleteProject(@PathVariable("id") String id){
@@ -92,7 +92,7 @@ public class ProjectController {
     }
 
 
-   // @PreAuthorize("@UserRole.isUP()")
+    @PreAuthorize("@UserRole.isUP()")
     @PostMapping (value="/project/edit/{id}")
     @ApiOperation(value = "Edit project by id")
     public void  editProject(@PathVariable("id") String id, @RequestBody ProjectCard projectCard) throws NoSuchFieldException, IllegalAccessException {
@@ -113,7 +113,7 @@ public class ProjectController {
 
     }
 
-    //  @PreAuthorize("@UserRole.isUP()")
+      @PreAuthorize("@UserRole.isUP()")
     @PostMapping (value="/project/find")
     @ApiOperation(value = "Find cards by param")
     public List<ProjectCard> findCards(@RequestBody FindHelper data) throws NoSuchFieldException, IllegalAccessException {

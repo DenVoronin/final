@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiOperation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
 
 
@@ -26,17 +27,19 @@ import javax.naming.*;
 
 import java.io.IOException;
 
-import static hhr.auth.SuccessHandlerCustom.user;
+
 
 
 @RestController
 @Api(value = "/", description = "User actions")
 
 public class UserController {
+private User user;
 
 @Autowired
-UserRoleCheck authComponent;
-
+UserController(User user){
+    this.user=user;
+}
 
     @GetMapping(value="/")
     @ApiOperation(value = "Hello")

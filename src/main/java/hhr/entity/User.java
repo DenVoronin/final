@@ -1,8 +1,14 @@
 package hhr.entity;
-import javax.persistence.Entity;
-import java.util.*;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
-public class User {
+import javax.persistence.Entity;
+import java.security.Principal;
+import java.util.*;
+@Component
+
+public class User  {
     String name;
     ArrayList groups;
     String role;
